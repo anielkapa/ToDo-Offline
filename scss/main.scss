@@ -1,0 +1,22 @@
+@mixin flexbox() {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+}
+
+* {
+  margin: 0 auto;
+  padding: 0;
+  border: 0;
+  vertical-align: baseline;
+  box-sizing: border-box;
+}
+
+.done{
+  text-decoration: line-through;
+  background-color: lightgrey;
+  color:darkgrey;
+  opacity: 0.85;
+}
