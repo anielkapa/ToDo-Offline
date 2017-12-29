@@ -47,11 +47,19 @@ $break-large: 1023px; // desktops and laptops
 /*css reset*/
 * {
   border: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
   box-sizing: border-box;
   margin: 0 auto;
   padding: 0;
   vertical-align: baseline;
 }
+
+*, *:before, *:after {
+  -webkit-box-sizing: inherit;
+  -moz-box-sizing: inherit;
+  box-sizing: inherit;
+  }
 
 html, body {
   font-family: nth($main_font,1);
