@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import Add from './add.jsx';
 import List from './list.jsx';
+import Today from './date.jsx';
+import {SortableContainer, SortableElement, arrayMove} from 'react-sortable-hoc';
 
 document.addEventListener('DOMContentLoaded', function(){
     class App extends Component {
@@ -9,89 +11,89 @@ document.addEventListener('DOMContentLoaded', function(){
         super(props);
         this.state = {
           value:'',
-          listToDo: [],
-          listDone:[],
-          done: false
+          listToDo: ['Buy new sweatshirt', 'Begin promotional phase', 'Read an article', 'Try not to fall asleep', 'Watch "Sherlock"', 'Begin QA for the product', 'Go for a walk'],
+          active:["done","done","active","active","active","active","active"],
+          buttonActive:["done_button","done_button","undone_button","undone_button","undone_button","undone_button","undone_button"]
         };
-      }
+      };
+      createList = ()=>{
+        const SortableItem = SortableElement(({value}) =>
+            <li>
+              {value}
+          </li>
+        );
+        const SortableList = SortableContainer(({items}) => {
+        return (
+            <ul>
+              {items.map((value, index) => (
+                <div key={index} className={this.state.active[index]}>
+                <SortableItem key={`items-${index}`} index={index} value={value}/>
+                <button onClick={e=>this.doneItem(index)} key={`done-${index}`} className={this.state.buttonActive[index]} index={index}>  </button>
+                <button onClick={e=>this.deleteItem(index)} key={`del-${index}`} className="delete_button" index={index}> X </button>
+              </div>
+            ))}
+            </ul>
+          );
+        });
+        let liList = this.state.listToDo;
+        if (liList.length === 0){
+          return null;
+        }else {
+          return <SortableList items={this.state.listToDo} onSortEnd={this.onSortEnd} />;
+        }
+      };
+      onSortEnd = ({oldIndex, newIndex}) => {
+        this.setState({
+          listToDo: arrayMove(this.state.listToDo, oldIndex, newIndex),
+          active: arrayMove(this.state.active, oldIndex, newIndex),
+          buttonActive: arrayMove(this.state.buttonActive, oldIndex, newIndex)
+        });
+      };
+      newToDo = (event) =>{
+        this.setState({value:event.target.value});
+      };
       addToList = (event) =>{
         event.preventDefault();
         let submited = this.state.value;
         this.setState({
           value: '',
-          listToDo: [this.state.value, ...this.state.listToDo]
+          listToDo: [this.state.value, ...this.state.listToDo],
+          active: ['active', ...this.state.active],
+          buttonActive:['undone_button', ...this.state.buttonActive]
         })
-      }
-      newToDo = (event) =>{
-        this.setState({value:event.target.value});
-      }
-      createList = ()=>{
-        let liList = this.state.listToDo;
-        if (liList.length === 0){
-          return null;
-        }else {
-          const toRender = liList.map((element,index)=>{
-            return(<li key={index} className="active">
-              <button className="done_button" onClick={e=>this.doneItem(index)}>V</button>
-              {element}
-              <button className='delete_button' onClick={e=>this.deleteItem(index)}>X</button>
-              </li>)
-          });
-          return toRender;
-        }
-      }
-      createDoneList = ()=>{
-        let liList = this.state.listDone;
-        if (liList.length === 0){
-          return null;
-        }else {
-          const toRender = liList.map((element,index)=>{
-            return(<li key={index} className="done">
-              <button className="active_button" onClick={e=>this.activeItem(index)}>...</button>
-              {element}
-              <button className='delete_button' onClick={e=>this.deleteItem(index)}>X</button>
-              </li>)
-          });
-          return toRender;
-        }
-      }
+      };
       deleteItem = (index) =>{
-          let listUpdated = this.state.listToDo;
+          const listUpdated = this.state.listToDo;
+          const activeUpdated = this.state.active;
+          const activeButton = this.state.buttonActive;
           listUpdated.splice(index, 1);
-          this.setState({listToDo:listUpdated});
-      }
-      activeItem = (index) =>{
-          const listUpdated = this.state.listDone;
-          const activeItems = this.state.listToDo;
-          activeItems.push(listUpdated[index]);
-          listUpdated.splice(index, 1);
-          this.setState({listDone: listUpdated, listToDo: activeItems});
+          activeUpdated.splice(index, 1);
+          activeButton.splice(index, 1);
+          this.setState({listToDo:listUpdated, active:activeUpdated,buttonActive:activeButton});
       };
       doneItem = (index) => {
-         const listUpdated = this.state.listToDo;
-         const doneItems = this.state.listDone;
-         doneItems.push(listUpdated[index]);
-         listUpdated.splice(index, 1);
-         this.setState({listDone: doneItems, listToDo: listUpdated});
-     }
-      classChange = ()=>{
-        this.state.done ? 'done': null;
-      }
+        const activeList = this.state.active;
+        const activeButton = this.state.buttonActive;
+        activeList[index] ==="active"? activeList[index]="done" : activeList[index]="active";
+        activeButton[index] === "done_button"? activeButton[index] = "undone_button" : activeButton[index] ="done_button";
+        this.setState({active:activeList, buttonActive:activeButton})
+     };
       render(){
         return(
-					<div style={{width:"100vw"}} >
-            <h1>This is your pocket-offline TODO list</h1>
+					<div className={"container"}>
+            <Today />
 						<Add
               addToList={this.addToList}
               newToDo={this.newToDo}
-              value={this.state.value} />
+              value={this.state.value}
+              />
 						<List
               createList={this.createList}
               createDoneList={this.createDoneList}/>
 					</div>
         );
       }
-    }
+    };
     ReactDOM.render(
         <App />,
         document.getElementById('app')

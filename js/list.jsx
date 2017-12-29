@@ -9,13 +9,8 @@ class List extends Component {
   }
   render(){
     return(
-      <div>
-        <ul className="toDo">
+      <div className="list">
           {this.props.createList()}
-        </ul>
-        <ul className="done">
-          {this.props.createDoneList()}
-        </ul>
       </div>
     );
   }

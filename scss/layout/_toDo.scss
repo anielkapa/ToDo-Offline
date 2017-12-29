@@ -1,0 +1,80 @@
+
+/**Buttons & list styling**/
+%button{
+  background-color: nth($logo_color,5);
+  border-radius: 50%;
+  height: nth($height-px,1);
+  text-align: center;
+  width: nth($width-px,1);
+}
+
+%lilist {
+  @include flexbox;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  height: nth($height-px,2);
+  width: nth($width-percentage,1);
+}
+
+li{
+  @include flexbox;
+  height: nth($height-percentage,2);
+  width: nth($width-percentage,6);
+  justify-content: flex-start;
+  list-style: none;
+  text-align: justify;
+  @include breakpoint (small-mobile) {
+    font-size: nth($font-size,1);
+  }
+  @include breakpoint (mobiles-tablets) {
+    font-size: nth($font-size,2);
+  }
+  @include breakpoint (medium-screens) {
+    font-size: nth($font-size,3);
+  }
+  @include breakpoint (wide-screens) {
+    font-size: nth($font-size,4);
+  }
+}
+
+.list {
+  width: nth($width-percentage,2); 
+  height: nth($height-viewport,4);
+  ul {
+  @include flexbox;
+  flex-direction: column;
+  justify-content: space-around;
+  height: nth($height-percentage,2);
+  width: nth($width-percentage, 1);
+  .done{
+    color: nth($logo_color,2);
+    @extend %lilist;
+    @include flexbox;
+    .done_button{
+      border: 2px solid #50eda6;
+      color: nth($logo_color,3);
+      background-image: url('./img/done.png');
+      transform: rotate(45deg);
+      background-repeat: no-repeat;
+      background-size: auto;
+      background-position: center;
+      @extend %button;
+    }
+  }
+}
+  .active{
+    color: nth($logo_color,1);
+    @extend %lilist;
+    .undone_button{
+      border: 2px solid lightgrey;
+      @extend %button;
+    }
+  }
+}
+
+.delete_button{
+  border: 2px solid nth($logo_color,1);
+  color: nth($logo_color,5);
+  background-color: nth($logo_color,1);
+  @extend %button;
+}

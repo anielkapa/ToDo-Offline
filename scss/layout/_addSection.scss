@@ -1,0 +1,30 @@
+/** add section**/
+.add{
+  width: nth($width-percentage,1);
+  input{
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    right: 0;
+    bottom: 45px;
+    border: 2px solid nth($logo_color,2);
+  }
+  .add_button{
+    border-radius: 50%;
+    width: nth($width-px,2);
+    height: nth($height-px,3);
+    background-color: nth($logo_color,3);
+    color: nth($logo_color,4);
+    text-align: center;
+    font-size: nth($font-size,6);
+    position: absolute;
+    bottom: -31px;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+  }
+}

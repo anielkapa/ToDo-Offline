@@ -9,10 +9,10 @@ class Add extends Component {
   }
   render(){
     return(
-      <div>
+      <div className="add">
         <form>
-          <input value={this.props.value} placeholder="add to-do" type="text" onChange={this.props.newToDo}></input>
-          <button onClick={this.props.addToList}>Add!</button>
+          <input value={this.props.value} placeholder=" add to-do " type="text" onChange={this.props.newToDo}></input>
+          <button className="add_button" onClick={this.props.addToList}>+</button>
         </form>
       </div>
     );

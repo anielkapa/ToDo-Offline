@@ -34,9 +34,14 @@
     "gulp-plumber": "^1.1.0",
     "gulp-sass": "^3.1.0",
     "gulp-sourcemaps": "^2.6.1",
+    "idb": "^2.0.4",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
+    "sw-precache-webpack-plugin-loader": "^1.0.2",
     "webpack": "^3.10.0",
     "webpack-dev-server": "^2.9.7"
+  },
+  "dependencies": {
+    "react-sortable-hoc": "^0.6.8"
   }
 }
