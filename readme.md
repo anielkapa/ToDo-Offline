@@ -1,9 +1,7 @@
-# ToDo List Offline
-is a simple to-do-list app with drag & drop option that will be read to be used offline and in case of lie-fie.
+# ToDo List 
+is a simple to-do-list app with drag & drop option
 
 ### Overview
-This is a simple, REACT based app that will use Service Workers and IndexedDb that brings Offline First benefits.
-
 IN PROGRESS ...
 
 ### Next steps
@@ -45,11 +43,3 @@ IN PROGRESS ...
 * Webpack
 * Gulp
 
-### Author
-* [Anna Sobkowiak](https://github.com/anielkapa)
-
-### License
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
-
-### Acknowledgments
-* This is project done after completing the Google Developer Challenge Scholarship: Mobile Web Specialist track
