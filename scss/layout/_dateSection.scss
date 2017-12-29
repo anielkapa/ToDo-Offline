@@ -1,0 +1,52 @@
+/**date section**/
+.date{
+  @include flexbox;
+  flex-direction: row;
+  align-items: center;
+  height: nth($height-viewport,3);
+  width: nth($width-percentage,2);
+  .date_dayMonthYear{
+    @include flexbox;
+    width: nth($width-percentage,3);
+    height: nth($height-percentage,2);
+    flex-direction: row;
+    strong{
+      @include flexbox;
+      height: nth($height-percentage,2);
+      text-align: right;
+      width: nth($width-percentage,5);
+      align-items: center;
+      @include breakpoint (small-mobile) {
+        font-size: nth($font-size,8);
+      }
+      @include breakpoint (mobiles-tablets) {
+        font-size: nth($font-size,7);
+      }
+      @include breakpoint (medium-screens) {
+        font-size: nth($font-size,5);
+      }
+      @include breakpoint (wide-screens) {
+        font-size: nth($font-size,5);
+      }
+    }
+    .date_dayMonthYear_dayMonth{
+      @include flexbox;
+      flex-direction: column;
+      justify-content: center;
+      height: nth($height-percentage,2);
+      width: nth($width-percentage,4);
+      span{
+        width: nth($width-percentage,1);
+        @include flexbox;
+        justify-content: flex-start;
+      }
+    }
+  }
+  .date_weekday{
+    @include flexbox;
+    justify-content: flex-end;
+    align-items: center;
+    height:  nth($height-percentage,2);
+    width: nth($width-percentage,3);
+  }
+}
